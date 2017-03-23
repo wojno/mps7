@@ -1,12 +1,8 @@
 require 'test_helper'
 
 class ProcessTest < Minitest::Test
-  def setup
-    @filename = "../txnlog.dat"
-  end
-
   def test_it_can_process_the_provided_file
-    output = Mps7::Process.new(@filename).execute
+    output = Mps7::Process.new('./test/files/txnlog.dat').execute
     assert_equal(71, output.size)
 
     # What is the total amount in dollars of debits?
