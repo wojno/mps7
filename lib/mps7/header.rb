@@ -7,7 +7,7 @@ class Header < BaseObject
     numericality: {  equal_to: 1, message: 'Unsupported version -- %{value}'}
   validates :count, numericality: {  greater_than: 0 }
 
-  attr_accessor :magic_string, :version, :count
+  attr_reader :magic_string, :version, :count
 
   def initialize(data)
     @magic_string = data[0]

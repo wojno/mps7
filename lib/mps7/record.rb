@@ -29,7 +29,7 @@ class Record < BaseObject
               end
   end
 
-  attr_accessor :type_id, :timestamp, :user_id, :amount
+  attr_reader :type_id, :timestamp, :user_id, :amount
 
   def initialize(data)
     @type_id     = data[0]
