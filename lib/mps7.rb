@@ -2,21 +2,19 @@ Dir.glob('./lib/mps7/*.rb', &method(:require))
 
 module Mps7
   class Process
-    def initialize(file)
-      @file   = file
-      @output = []
+    def initialize(filename)
+      @file     = File.new(filename)
+      @filename = filename
+      @output   = []
     end
     def execute
-      data   = read_file
-      header = Header.new(ReadHeader.new(data[0..8]).from_binary)
+      data   = read_file(9)
+      header = Header.new(ReadHeader.new(data).from_binary)
       Mps7.logger.debug "Header -- #{header.to_h}"
       if header.valid?
-        starting = 9
         header.count.times do |index|
           Mps7.logger.debug "Processing record #{index+1} of #{header.count}"
-          # TODO: chop data off the file everytime its processed?
-          starting = content(data: data, starting: starting)
-          Mps7.logger.debug "Next record will begin at #{starting}"
+          @output << parse_record
         end
       else
         Mps7.logger.fatal header.errors.full_messages.join(", ")
@@ -26,19 +24,14 @@ module Mps7
 
     private
 
-    def read_file
-      Mps7.logger.debug "Begin processing -- #{@file}"
-      File.binread(@file)
-      # TODO: file not found?
+    def read_file(bytes)
+      @file.read(bytes)
     end
 
-    def content(data:, starting:)
-      ending = DetermineChunkEnd.new(
-        data: data,
-        starting: starting
-      ).calculate
-      @output << ProcessRecord.new(data[starting..ending]).retrieve
-      ending + 1
+    def parse_record
+      type_byte = read_file(1)
+      length    = read_file(DetermineChunkEnd.new(type_byte).calculate)
+      ProcessRecord.new("#{type_byte}#{length}").retrieve
     end
   end
 end

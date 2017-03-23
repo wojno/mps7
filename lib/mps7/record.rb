@@ -22,11 +22,11 @@ class Record < BaseObject
   # TODO: perhaps move this into the initialize method
   def amount_sign
     @amount = case RetrieveRecordType.new(type_id).from_data
-    when 'debit'
-      -@amount
-    when 'credit'
-      @amount.abs
-    end
+              when 'debit'
+                -@amount
+              when 'credit'
+                @amount.abs
+              end
   end
 
   attr_accessor :type_id, :timestamp, :user_id, :amount

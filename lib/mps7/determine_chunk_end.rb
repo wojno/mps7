@@ -1,7 +1,8 @@
+# Determines length of chunk to read in from the file
+# based upon the type of record application is evaluating
 class DetermineChunkEnd
-  def initialize(data:, starting:)
-    @data     = data
-    @starting = starting
+  def initialize(data)
+    @data = data
   end
 
   def calculate
@@ -11,11 +12,11 @@ class DetermineChunkEnd
   private
 
   def from_record_type
-    case RetrieveRecordType.new(@data[@starting]).from_data
+    case RetrieveRecordType.new(@data).from_data
     when "debit", "credit"
-      @starting + 20
+      20
     when "start_auto_pay", "end_auto_pay"
-      @starting + 12
+      12
     end
   end
 end
