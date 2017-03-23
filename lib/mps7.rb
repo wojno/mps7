@@ -1,6 +1,7 @@
 Dir.glob('./lib/mps7/*.rb', &method(:require))
 
 module Mps7
+  # Process transaction binary
   class Process
     def initialize(filename)
       @file     = File.new(filename)
