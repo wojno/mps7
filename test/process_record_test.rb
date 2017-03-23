@@ -4,9 +4,7 @@ class ProcessRecordTest < Minitest::Test
 
   def test_returns_a_basic_transaction_when_receiving_13_bytes
     pr = ProcessRecord.new(
-      data:     "\u0002R\xE1\xF4\xBB3\xAF\xD3yAC\x90\x89",
-      starting: 0,
-      ending:   12
+      "\u0002R\xE1\xF4\xBB3\xAF\xD3yAC\x90\x89"
     )
     expected = {
       "type_id"   => 2,
@@ -18,9 +16,7 @@ class ProcessRecordTest < Minitest::Test
   end
   def test_returns_a_negative_amount_when_receiving_21_bytes_for_debit
     pr = ProcessRecord.new(
-      data:     "\u0000S\t'\xD19gG\xC0Eّ!@\x82\xE21\xD6\xD7.\x8D\u0001T",
-      starting: 0,
-      ending:   21
+      "\u0000S\t'\xD19gG\xC0Eّ!@\x82\xE21\xD6\xD7.\x8D\u0001T"
     )
     expected = {
       "type_id"   => 0,
@@ -32,9 +28,7 @@ class ProcessRecordTest < Minitest::Test
   end
   def test_returns_a_positive_amount_when_receiving_21_bytes_for_credit
     pr = ProcessRecord.new(
-      data:     "\u0001S\t'\xD19gG\xC0Eّ!@\x82\xE21\xD6\xD7.\x8D\u0001T",
-      starting: 0,
-      ending:   21
+      "\u0001S\t'\xD19gG\xC0Eّ!@\x82\xE21\xD6\xD7.\x8D\u0001T"
     )
     expected = {
       "type_id"   => 1,
@@ -45,11 +39,7 @@ class ProcessRecordTest < Minitest::Test
     assert_equal(expected, pr.retrieve)
   end
   def test_returns_nil_when_retrieved_record_is_invalid
-    pr = ProcessRecord.new(
-      data:     "MPS7",
-      starting: 0,
-      ending:   3 
-    )
+    pr = ProcessRecord.new("MPS7")
     assert_nil pr.retrieve
   end
 end

@@ -1,9 +1,7 @@
 # Process 13 / 21 byte transactional record
 class ProcessRecord
-  def initialize(data:, starting:, ending:)
+  def initialize(data)
     @data     = data
-    @starting = starting
-    @ending   = ending
   end
 
   # each record contains:
@@ -29,8 +27,8 @@ class ProcessRecord
   end
 
   def retrieve_from_file
-    Mps7.logger.debug "Record Unpack Range -- #{@starting}..#{@ending}"
-    @data[@starting..@ending].unpack('cNQ>G') 
+    Mps7.logger.debug "Record Unpack Length -- #{@data.length}"
+    @data.unpack('cNQ>G')
   end
 
 end

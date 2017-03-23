@@ -37,7 +37,7 @@ module Mps7
         data: data,
         starting: starting
       ).calculate
-      @output << ProcessRecord.new(data: data, starting: starting, ending: ending).retrieve
+      @output << ProcessRecord.new(data[starting..ending]).retrieve
       ending + 1
     end
   end
