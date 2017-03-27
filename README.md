@@ -1,8 +1,17 @@
 # Mps7
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/mps7`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Build Status](https://travis-ci.org/wojno/mps7.svg?branch=master)](https://travis-ci.org/wojno/mps7)
 
-TODO: Delete this and the text above, and describe your gem
+[![Code Climate](https://codeclimate.com/github/wojno/mps7/badges/gpa.svg)](https://codeclimate.com/github/wojno/mps7)
+
+[![Test Coverage](https://codeclimate.com/github/wojno/mps7/badges/coverage.svg)](https://codeclimate.com/github/wojno/mps7/coverage)
+
+Binary protocol format consumption agent for the old-school mainframe, `MPS7`.  Reads proprietary binary for payment processing.
+
+Implemented in a manner that could be leveraged in a `microservice` oriented environment.  A library which subscribes to the `Unix` philosophy: 
+
+> do one thing and do it well
+
 
 ## Installation
 
@@ -22,7 +31,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This library accepts a `binary` record as input and returns an `array` of objects for downstream processing:
+
+    Mps7::Process.new('txnlog.dat').execute
 
 ## Development
 
@@ -32,5 +43,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/mps7.
+Bug reports and pull requests are welcome on GitHub at https://github.com/wojno/mps7.
 
