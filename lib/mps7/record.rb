@@ -1,4 +1,5 @@
-require './lib/mps7/base_object'
+require 'mps7/base_object'
+
 # Transactional Record containing:
 # record type
 # Unix timestamp

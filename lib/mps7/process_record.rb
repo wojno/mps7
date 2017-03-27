@@ -1,3 +1,5 @@
+require 'mps7/record'
+
 # Process 13 / 21 byte transactional record
 class ProcessRecord
   def initialize(data)

@@ -1,3 +1,5 @@
+require 'mps7/base_object'
+
 # Header contains the canoical information about how records are processed
 class Header < BaseObject
 

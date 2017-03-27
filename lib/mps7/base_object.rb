@@ -9,7 +9,7 @@ class BaseObject
     self.instance_variables.reject{|key| [:@validation_context, :@errors]
         .include? key }
         .each_with_object({}) {
-          |e,a| a[e.to_s.tr('@','')] = self.instance_eval(e.to_s)
+          |value,hash| hash[value.to_s.tr('@','')] = self.instance_eval(value.to_s)
         }
   end
 end

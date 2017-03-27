@@ -1,3 +1,5 @@
+require 'mps7/retrieve_record_type'
+
 # Determines length of chunk to read in from the file
 # based upon the type of record application is evaluating
 class DetermineChunkEnd
